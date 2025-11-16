@@ -125,8 +125,7 @@ body.menu-center .start-menu.hidden {
   display: grid;
   grid-template-columns: repeat(1, 92px);
   gap: 12px 8px;
-  z-index: 0;
-  box-shadow:5px 2px 4px rgb(0, 0, 0);
+  z-index: 1;
 }
 
 .desktop-icon {
@@ -138,16 +137,13 @@ body.menu-center .start-menu.hidden {
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  z-index: 1;
   padding: 8px 4px;
   border-radius: 8px;
   cursor: default;
-  box-shadow:5px 2px 4px rgb(0, 0, 0);
 }
 
 .desktop-icon:hover {
   background: rgba(255, 255, 255, 0.06);
-  box-shadow:5px 2px 4px rgb(0, 0, 0);  
 }
 
 .desktop-icon img {
@@ -166,11 +162,9 @@ body.menu-center .start-menu.hidden {
   position: absolute;
   inset: 0 0 52px 0;
 }
-
 textarea {
   resize: none;
 }
-
 .window {
   position: absolute;
   min-width: 360px;
@@ -248,7 +242,7 @@ textarea {
 }
 
 /* Monaco host fills window content */
-.window-content>.monaco-host {
+.window-content > .monaco-host {
   height: 100%;
 }
 
@@ -274,6 +268,7 @@ textarea {
   border-left: 1px solid rgba(255, 255, 255, 0.06);
   border-right: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 16px 16px 0 0;
+  z-index: 1000;
   padding: 0 16px;
   box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.4);
 }
@@ -308,7 +303,6 @@ textarea {
   min-height: 40px;
   padding: 0 8px;
   position: relative;
-  z-index: 1000;
 }
 
 .taskbar-center:hover {
@@ -509,38 +503,29 @@ body.menu-right .start-menu.hidden {
 }
 
 .btn {
-  background-color: #4e4e4e;
-  color: #fff;
-  font-size: 1.2rem;
-  padding: 15px;
-  border: none;
+  height: 30px;
+  padding: 0 10px;
   border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px #3a3a3a;
-}
-
-.btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px #3a3a3a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.25);
+  color: #e8e8ef;
 }
 
 .btn:hover {
-  background-color: #6e6e6e;
+  background: rgba(255, 0, 0, 0.08);
 }
 
-
 /* Game styles */
-.window-content>div[style*="display: flex"] {
+.window-content > div[style*="display: flex"] {
   display: flex !important;
 }
 
-.window-content>div[style*="display: grid"] {
+.window-content > div[style*="display: grid"] {
   display: grid !important;
 }
 
 /* Center game boards */
-.window-content>div>div[style*="justify-content: center"] {
+.window-content > div > div[style*="justify-content: center"] {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -558,7 +543,7 @@ canvas {
 
 canvas:hover {
   transform: scale(1.01);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6) !important;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.6) !important;
 }
 
 /* Game buttons spacing */
@@ -598,7 +583,7 @@ canvas:hover {
 }
 
 /* Game info bars */
-.window-content>div>div[style*="display: flex"][style*="justify-content: space-between"] {
+.window-content > div > div[style*="display: flex"][style*="justify-content: space-between"] {
   gap: 8px;
   flex-wrap: wrap;
   animation: fadeIn 0.3s ease-in;
@@ -610,7 +595,6 @@ canvas:hover {
     opacity: 0;
     transform: translateY(-10px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -622,7 +606,6 @@ canvas:hover {
     opacity: 0;
     transform: scale(0.9);
   }
-
   to {
     opacity: 1;
     transform: scale(1);
@@ -630,19 +613,16 @@ canvas:hover {
 }
 
 @keyframes pulse {
-
-  0%,
-  100% {
+  0%, 100% {
     transform: scale(1);
   }
-
   50% {
     transform: scale(1.05);
   }
 }
 
 /* Game board animations */
-.window-content>div>div[style*="display: grid"] {
+.window-content > div > div[style*="display: grid"] {
   animation: slideIn 0.4s ease-out;
 }
 
@@ -736,7 +716,7 @@ body.screen-tablet .window {
   .start-apps {
     grid-template-columns: repeat(3, 1fr);
   }
-
+  
   .window-content .btn {
     font-size: 12px;
     padding: 0 8px;
@@ -879,33 +859,12 @@ body.screen-tablet .window {
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-@media (max-height: 600px) {
-
+@media (max-width: 900px) {
   .welcome-container {
     flex-direction: column;
     gap: 20px;
   }
-}
-
-
-@media (max-width: 90px) {
-  .welcome-container {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .desktop-icons,
-  .desktop-icon {
-    z-index: 1;
-  }
-
-  .taskbar,
-  .taskbar-center,
-  .taskbar-left,
-  .taskbar-right {
-    z-index: 1000;
-  }
-
+  
   .welcome-step::after {
     content: '↓';
     right: auto;
@@ -913,113 +872,9 @@ body.screen-tablet .window {
     top: auto;
     transform: none;
   }
-
+  
   .welcome-step {
     min-width: 280px;
     min-height: 300px;
   }
-}
-
-.btn {
-  background: #4e4e4e;
-  color: #fff;
-  font-size: 1.2rem;
-  padding: 12px 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px #3a3a3a;
-  transition: 0.2s;
-}
-
-.btn:hover { background: #6e6e6e; }
-.btn:active { transform: translateY(2px); box-shadow: 0 2px #3a3a3a; }
-
-@media (max-width: 480px) {
-  .desktop-icons { grid-template-columns: repeat(1, 50px); gap: 6px; }
-  .desktop-icon { width: 50px; gap: 4px; padding: 4px; }
-  .desktop-icon img { width: 24px; height: 24px; }
-  .desktop-icon span { font-size: 9px; }
-  .window { min-width: 200px; min-height: 150px; max-width: calc(100vw - 10px); max-height: calc(100vh - 50px); }
-  .window-titlebar { height: 28px; }
-  .window-title { font-size: 10px; }
-  .wc-btn { width: 32px; height: 24px; }
-  .window-content { padding: 6px; height: calc(100% - 28px); }
-  .window-content .btn { font-size: 10px; padding: 0 4px; height: 24px; }
-  .taskbar { height: 40px; width: calc(100vw - 4px); left: 2px; right: 2px; padding: 0 4px; }
-  .taskbar-btn, .taskbar-icon { width: 36px; height: 36px; }
-  .taskbar-btn img, .taskbar-icon img { width: 14px; height: 14px; }
-  .taskbar-clock { font-size: 9px; padding: 2px 4px; }
-  .start-menu { left: 2px; right: 2px; width: calc(100vw - 10px); max-height: calc(100vh - 100px); bottom: 48px; padding: 8px; }
-  .start-search input { height: 28px; font-size: 12px; }
-  .start-apps { grid-template-columns: repeat(2, 1fr); gap: 6px; }
-  .start-app { height: 70px; gap: 4px; }
-  .start-app img { width: 24px; height: 24px; }
-  .start-app span { font-size: 10px; }
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-  .desktop-icons { grid-template-columns: repeat(1, 65px); gap: 8px; }
-  .desktop-icon { width: 65px; gap: 4px; }
-  .desktop-icon img { width: 28px; height: 28px; }
-  .desktop-icon span { font-size: 11px; }
-  .window { min-width: 280px; min-height: 200px; max-width: calc(100vw - 16px); max-height: calc(100vh - 60px); }
-  .window-titlebar { height: 32px; }
-  .window-title { font-size: 11px; }
-  .wc-btn { width: 36px; height: 26px; }
-  .window-content { padding: 8px; height: calc(100% - 32px); }
-  .window-content .btn { font-size: 11px; padding: 0 6px; height: 28px; }
-  .taskbar { height: 44px; width: calc(100vw - 8px); left: 4px; right: 4px; }
-  .taskbar-btn, .taskbar-icon { width: 40px; height: 40px; }
-  .taskbar-clock { font-size: 11px; padding: 4px 8px; }
-  .start-menu { left: 8px; right: 8px; width: calc(100vw - 20px); max-height: calc(100vh - 120px); bottom: 52px; }
-  .start-apps { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .start-app { height: 78px; gap: 5px; }
-  .start-app img { width: 28px; height: 28px; }
-  .start-app span { font-size: 11px; }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .desktop-icons { grid-template-columns: repeat(1, 80px); gap: 10px; }
-  .desktop-icon { width: 80px; }
-  .window { min-width: 300px; max-width: 85vw; max-height: 85vh; }
-  .taskbar { height: 48px; width: 85%; left: 7.5%; right: 7.5%; }
-  .taskbar-btn, .taskbar-icon { width: 42px; height: 42px; }
-  .start-menu { width: 80%; left: 10%; right: 10%; max-height: 80vh; bottom: 56px; }
-  .start-apps { grid-template-columns: repeat(4, 1fr); gap: 10px; }
-  .start-app { height: 85px; }
-}
-
-@media (min-width: 1025px) {
-  .start-apps { grid-template-columns: repeat(6, 1fr); }
-}
-
-@media (max-height: 600px) {
-  .window { max-height: calc(100vh - 50px); }
-  .start-menu { max-height: calc(100vh - 100px); }
-  .taskbar { height: 38px; }
-  .taskbar-btn, .taskbar-icon { width: 36px; height: 36px; }
-  .taskbar-clock { font-size: 10px; padding: 3px 6px; }
-}
-
-@media (max-width: 800px) and (max-height: 480px) {
-  .desktop-icons { grid-template-columns: repeat(1, 40px); gap: 4px; }
-  .desktop-icon { width: 40px; padding: 2px; }
-  .desktop-icon img { width: 20px; height: 20px; }
-  .desktop-icon span { font-size: 8px; }
-  .window { min-width: 180px; max-height: calc(100vh - 40px); }
-  .taskbar { height: 38px; }
-  .start-menu { bottom: 40px; max-height: calc(100vh - 70px); padding: 8px; }
-  .start-apps { gap: 6px; }
-  .start-app { height: 60px; gap: 3px; }
-  .start-app img { width: 22px; height: 22px; }
-  .start-app span { font-size: 9px; }
-}
-
-@media (min-width: 1920px) {
-  .start-apps { grid-template-columns: repeat(8, 1fr); }
-  .start-app { height: 95px; }
-  .start-app img { width: 34px; height: 34px; }
-  .taskbar { height: 56px; }
-  .taskbar-btn, .taskbar-icon { width: 48px; height: 48px; }
 }
